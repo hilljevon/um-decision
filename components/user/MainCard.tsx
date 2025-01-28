@@ -27,6 +27,7 @@ import {
     TabsTrigger,
 } from "@/components/ui/tabs"
 import { Check, Cross, LetterText, MailCheckIcon, Speech, X } from 'lucide-react'
+import { toast } from 'sonner'
 interface UMDecisionInterface {
     action: string,
     reason: string,
@@ -529,6 +530,9 @@ const MainCard = () => {
             if (newQuestion) {
                 setCurrentQuestion(newQuestion)
                 setQuestionStack(prevStack => [...prevStack, newQuestion])
+                if (newQuestion.startTransfer) {
+                    toast.success("Start Transfer")
+                }
             }
         } else if (choice == "no" && currentQuestion.noIndex) {
             const newQuestion = initialNotificationQuestions.find(question => question.id == currentQuestion.noIndex)
