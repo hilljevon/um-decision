@@ -502,11 +502,18 @@ const initialNotificationQuestions: QuestionInterface[] = [
     },
 
 ]
+
 //  ** For all decisions, no will be represented by 0 and yes will equal 1.
 const MainCard = () => {
     const [questionStack, setQuestionStack] = useState<QuestionInterface[]>([initialNotificationQuestions[0]])
     const [currentQuestion, setCurrentQuestion] = useState(initialNotificationQuestions[0])
     const [decisionMade, setDecisionMade] = useState<UMDecisionInterface | null>(null)
+    const spanMotionAnimation = {
+        initial: { scale: 0.5 },
+        animate: { scale: 1 },
+        exit: { opacity: 0, scale: 0.5 },
+        transition: { times: [0, 0.2, 1] }
+    }
     const handleBreadcrumbClick = (idx: number) => {
         setQuestionStack((prevStack) => {
             const newStack = prevStack.slice(0, idx + 1)
@@ -577,34 +584,98 @@ const MainCard = () => {
                             {decisionMade ? (
                                 <Card>
                                     <CardHeader>
+                                        {/* If Authorized Stable we want to use a particular color */}
                                         {decisionMade.action == "Authorized Stable" ? (
                                             <CardTitle className='flex flex-col items-center justify-center space-y-2 text-green-500'>
-                                                <span className='font-bold'>Action: </span> <span className=''>{decisionMade.action}</span>
+                                                <motion.div
+                                                    {...spanMotionAnimation}
+                                                >
+                                                    <motion.span
+                                                        key={currentQuestion.id}
+                                                        {...spanMotionAnimation}
+                                                        className='font-bold'
+                                                    >
+                                                        Action:
+                                                    </motion.span>
+                                                    <motion.span
+                                                        key={decisionMade.action}
+                                                        className=''
+                                                        {...spanMotionAnimation}
+                                                    >
+                                                        {decisionMade.action}
+                                                    </motion.span>
+                                                </motion.div>
                                             </CardTitle>
+                                            // if CCN, we want our font to be yellow
                                         ) : (decisionMade.letter == "CCN") ? (
                                             <CardTitle className='flex flex-col items-center justify-center space-y-2 text-yellow-500'>
-                                                <span className='font-bold'>Action: </span> <span className=''>{decisionMade.action}</span>
+                                                <motion.div
+                                                    {...spanMotionAnimation}
+                                                >
+                                                    <motion.span
+                                                        key={currentQuestion.id}
+                                                        {...spanMotionAnimation}
+                                                        className='font-bold'
+                                                    >
+                                                        Action:
+                                                    </motion.span>
+                                                    <motion.span
+                                                        key={decisionMade.action}
+                                                        className=''
+                                                        {...spanMotionAnimation}
+                                                    >
+                                                        {decisionMade.action}
+                                                    </motion.span>
+                                                </motion.div>
                                             </CardTitle>
                                         ) : (
                                             <CardTitle className='flex flex-col items-center justify-center space-y-2 text-red-500'>
-                                                <span className='font-bold'>Action: </span> <span className=''>{decisionMade.action}</span>
+                                                <motion.div
+                                                    {...spanMotionAnimation}
+                                                >
+                                                    <motion.span
+                                                        key={currentQuestion.id}
+                                                        {...spanMotionAnimation}
+                                                        className='font-bold'
+                                                    >
+                                                        Action:
+                                                    </motion.span>
+                                                    <motion.span
+                                                        key={decisionMade.action}
+                                                        className=''
+                                                        {...spanMotionAnimation}
+                                                    >
+                                                        {decisionMade.action}
+                                                    </motion.span>
+                                                </motion.div>
                                             </CardTitle>
                                         )}
                                     </CardHeader>
                                     <CardContent className="flex flex-col space-y-2 justify-center items-center mt-12 text-center text-blue-500">
-                                        <span className='font-bold'>Reason: </span> {decisionMade.reason}
+                                        <motion.span
+                                            key={decisionMade.reason}
+                                            {...spanMotionAnimation}
+                                        >
+                                            <span className='font-bold'>Reason: </span> {decisionMade.reason}
+                                        </motion.span>
                                     </CardContent>
                                     <CardFooter className='mt-12 flex flex-col space-y-6 justify-center items-center text-yellow-800 font-extrabold text-xl'>
-                                        <div>
+                                        <motion.div
+                                            key={decisionMade.letter}
+                                            {...spanMotionAnimation}
+                                        >
                                             <span className='font-bold'> Letter: </span> {decisionMade.letter}
-                                        </div>
+                                        </motion.div>
                                         {decisionMade.exception && (
-                                            <div>
+                                            <motion.div
+                                                key={decisionMade.exception}
+                                                {...spanMotionAnimation}
+                                            >
                                                 <Button onClick={handleExceptionClick} variant={"outline"}>
                                                     <Speech />
                                                     Verbal Given After?
                                                 </Button>
-                                            </div>
+                                            </motion.div>
                                         )}
 
                                     </CardFooter>
@@ -612,14 +683,13 @@ const MainCard = () => {
                             ) : (
                                 <Card>
                                     <CardHeader>
-
                                         <CardTitle className='flex items-center justify-center text-xl'>
                                             <motion.span
                                                 key={currentQuestion.id}
-                                                initial={{ scale: 0 }}
+                                                initial={{ scale: 0.5 }}
                                                 animate={{ scale: 1 }}
-                                                exit={{ opacity: 0, scale: 0 }}
-
+                                                exit={{ opacity: 0, scale: 0.5 }}
+                                                transition={{ times: [0, 0.2, 1] }}
                                             >
                                                 {currentQuestion.question}
                                             </motion.span>
@@ -658,19 +728,21 @@ const MainCard = () => {
                                         </CardContent>
                                     ) : (
                                         <CardContent className="flex justify-around items-center mt-12">
-                                            <motion.div
-                                                className="space-y-1"
-                                                whileHover={{
-                                                    scale: 1.05,
-                                                    transition: { duration: 0.2 },
-                                                }}
-                                                whileTap={{ scale: 0.8 }}
-                                            >
-                                                <Button onClick={(e) => handleQuestionClick(e, "no")} variant={"destructive"}>
-                                                    <X />
-                                                    {currentQuestion.choices.no}
-                                                </Button>
-                                            </motion.div>
+                                            {currentQuestion.question != "If Any Non-KFH Verbal Stability Given Subsequently" && (
+                                                <motion.div
+                                                    className="space-y-1"
+                                                    whileHover={{
+                                                        scale: 1.05,
+                                                        transition: { duration: 0.2 },
+                                                    }}
+                                                    whileTap={{ scale: 0.8 }}
+                                                >
+                                                    <Button onClick={(e) => handleQuestionClick(e, "no")} variant={"destructive"}>
+                                                        <X />
+                                                        {currentQuestion.choices.no}
+                                                    </Button>
+                                                </motion.div>
+                                            )}
                                             <motion.div
                                                 className="space-y-1"
                                                 whileHover={{
