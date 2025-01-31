@@ -954,23 +954,25 @@ const MainCard = () => {
                     <fieldset className="grid gap-6 rounded-lg border p-4">
                         <legend className="-ml-1 px-1 text-sm font-bold">Select Tab for Previous Review Outcome</legend>
                         <div className="col-span-full">
-                            <Breadcrumb>
-                                <BreadcrumbList className='text-xs'>
-                                    {questionStack.map((question: QuestionInterface, idx) => (
-                                        <BreadcrumbItem className='border p-2 border-blue-400 pl-2 rounded-lg font-bold hover:bg-blue-500 hover:text-white hover:cursor-pointer' onClick={() => handleBreadcrumbClick(idx)} key={question.id}>
-                                            <BreadcrumbLink className='hover:cursor-pointer hover:text-white' >
-                                                {question.breadcrumb}
-                                            </BreadcrumbLink>
-                                            <BreadcrumbSeparator />
-                                        </BreadcrumbItem>
-                                    ))}
-                                    {decisionMade && (
-                                        <BreadcrumbItem className='border p-2 border-blue-400 pl-2 rounded-lg font-bold hover:bg-blue-500 hover:text-white hover:cursor-pointer'>
-                                            UM Decision
-                                        </BreadcrumbItem>
-                                    )}
-                                </BreadcrumbList>
-                            </Breadcrumb>
+                            {questionStack.length > 1 && (
+                                <Breadcrumb>
+                                    <BreadcrumbList className='text-xs'>
+                                        {questionStack.map((question: QuestionInterface, idx) => (
+                                            <BreadcrumbItem className='border p-2 border-blue-400 pl-2 rounded-lg font-bold hover:bg-blue-500 hover:text-white hover:cursor-pointer' onClick={() => handleBreadcrumbClick(idx)} key={question.id}>
+                                                <BreadcrumbLink className='hover:cursor-pointer hover:text-white' >
+                                                    {question.breadcrumb}
+                                                </BreadcrumbLink>
+                                                <BreadcrumbSeparator />
+                                            </BreadcrumbItem>
+                                        ))}
+                                        {decisionMade && (
+                                            <BreadcrumbItem className='border p-2 border-blue-400 pl-2 rounded-lg font-bold hover:bg-blue-500 hover:text-white hover:cursor-pointer'>
+                                                UM Decision
+                                            </BreadcrumbItem>
+                                        )}
+                                    </BreadcrumbList>
+                                </Breadcrumb>
+                            )}
                         </div>
                         <div className="col-span-full my-4">
                             <div className='flex w-full justify-center'>
