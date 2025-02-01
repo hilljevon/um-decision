@@ -1251,6 +1251,45 @@ const MainCard = () => {
                                                             </Button>
                                                         </motion.div>
                                                     )}
+                                                    <Dialog>
+                                                        <DialogTrigger>
+                                                            <InfoIcon size={18} color='orange' className="text-gray-400" />
+                                                        </DialogTrigger>
+                                                        <DialogContent>
+                                                            <DialogHeader className='flex items-center justify-center'>
+                                                                <DialogTitle> {currentQuestion.question} </DialogTitle>
+                                                                <DialogDescription className='mt-4'>
+                                                                    {currentQuestion.tooltip}
+                                                                </DialogDescription>
+                                                            </DialogHeader>
+                                                            <DialogFooter className="sm:justify-center flex justify-center items-center">
+                                                                <DialogClose asChild>
+                                                                    <Button type="button">
+                                                                        Close
+                                                                    </Button>
+                                                                </DialogClose>
+                                                            </DialogFooter>
+                                                        </DialogContent>
+                                                    </Dialog>
+                                                    <Dialog>
+                                                        <DialogTrigger>
+                                                            <RotateCcw color='blue' size={18} />
+                                                        </DialogTrigger>
+                                                        <DialogContent>
+                                                            <DialogHeader className='flex items-center justify-center'>
+                                                                <DialogTitle>Are You Sure You'd Like To Restart?</DialogTitle>
+                                                                <DialogDescription>
+                                                                </DialogDescription>
+                                                            </DialogHeader>
+                                                            <DialogFooter className="sm:justify-center flex justify-center items-center">
+                                                                <DialogClose asChild>
+                                                                    <Button onClick={resetQuestionaire} type="button" variant="secondary">
+                                                                        Yes
+                                                                    </Button>
+                                                                </DialogClose>
+                                                            </DialogFooter>
+                                                        </DialogContent>
+                                                    </Dialog>
                                                 </CardFooter>
                                             </Card>
                                         ) : (
@@ -1384,6 +1423,45 @@ const MainCard = () => {
                                                     >
                                                         <span className='font-bold'> Letter: </span> {decisionMade.letter}
                                                     </motion.div>
+                                                    <Dialog>
+                                                        <DialogTrigger>
+                                                            <InfoIcon size={18} color='orange' className="text-gray-400" />
+                                                        </DialogTrigger>
+                                                        <DialogContent>
+                                                            <DialogHeader className='flex items-center justify-center'>
+                                                                <DialogTitle> {currentQuestion.question} </DialogTitle>
+                                                                <DialogDescription className='mt-4'>
+                                                                    {currentQuestion.tooltip}
+                                                                </DialogDescription>
+                                                            </DialogHeader>
+                                                            <DialogFooter className="sm:justify-center flex justify-center items-center">
+                                                                <DialogClose asChild>
+                                                                    <Button type="button">
+                                                                        Close
+                                                                    </Button>
+                                                                </DialogClose>
+                                                            </DialogFooter>
+                                                        </DialogContent>
+                                                    </Dialog>
+                                                    <Dialog>
+                                                        <DialogTrigger>
+                                                            <RotateCcw color='blue' size={18} />
+                                                        </DialogTrigger>
+                                                        <DialogContent>
+                                                            <DialogHeader className='flex items-center justify-center'>
+                                                                <DialogTitle>Are You Sure You'd Like To Restart?</DialogTitle>
+                                                                <DialogDescription>
+                                                                </DialogDescription>
+                                                            </DialogHeader>
+                                                            <DialogFooter className="sm:justify-center flex justify-center items-center">
+                                                                <DialogClose asChild>
+                                                                    <Button onClick={resetQuestionaire} type="button" variant="secondary">
+                                                                        Yes
+                                                                    </Button>
+                                                                </DialogClose>
+                                                            </DialogFooter>
+                                                        </DialogContent>
+                                                    </Dialog>
                                                 </CardFooter>
                                             </Card>
                                         ) : (
@@ -1514,6 +1592,45 @@ const MainCard = () => {
                                                     >
                                                         <span className='font-bold'> Letter: </span> {decisionMade.letter}
                                                     </motion.div>
+                                                    <Dialog>
+                                                        <DialogTrigger>
+                                                            <InfoIcon size={18} color='orange' className="text-gray-400" />
+                                                        </DialogTrigger>
+                                                        <DialogContent>
+                                                            <DialogHeader className='flex items-center justify-center'>
+                                                                <DialogTitle> {currentQuestion.question} </DialogTitle>
+                                                                <DialogDescription className='mt-4'>
+                                                                    {currentQuestion.tooltip}
+                                                                </DialogDescription>
+                                                            </DialogHeader>
+                                                            <DialogFooter className="sm:justify-center flex justify-center items-center">
+                                                                <DialogClose asChild>
+                                                                    <Button type="button">
+                                                                        Close
+                                                                    </Button>
+                                                                </DialogClose>
+                                                            </DialogFooter>
+                                                        </DialogContent>
+                                                    </Dialog>
+                                                    <Dialog>
+                                                        <DialogTrigger>
+                                                            <RotateCcw color='blue' size={18} />
+                                                        </DialogTrigger>
+                                                        <DialogContent>
+                                                            <DialogHeader className='flex items-center justify-center'>
+                                                                <DialogTitle>Are You Sure You'd Like To Restart?</DialogTitle>
+                                                                <DialogDescription>
+                                                                </DialogDescription>
+                                                            </DialogHeader>
+                                                            <DialogFooter className="sm:justify-center flex justify-center items-center">
+                                                                <DialogClose asChild>
+                                                                    <Button onClick={resetQuestionaire} type="button" variant="secondary">
+                                                                        Yes
+                                                                    </Button>
+                                                                </DialogClose>
+                                                            </DialogFooter>
+                                                        </DialogContent>
+                                                    </Dialog>
                                                 </CardFooter>
                                             </Card>
                                         ) : (
