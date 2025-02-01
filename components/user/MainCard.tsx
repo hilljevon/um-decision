@@ -958,7 +958,7 @@ const MainCard = () => {
                                 <Breadcrumb>
                                     <BreadcrumbList className='text-xs'>
                                         {questionStack.map((question: QuestionInterface, idx) => (
-                                            <BreadcrumbItem className='border p-2 border-blue-400 pl-2 rounded-lg font-bold hover:bg-blue-500 hover:text-white hover:cursor-pointer' onClick={() => handleBreadcrumbClick(idx)} key={question.id}>
+                                            <BreadcrumbItem className='border p-1 border-blue-400 rounded-lg font-bold hover:bg-blue-500 hover:text-white hover:cursor-pointer' onClick={() => handleBreadcrumbClick(idx)} key={question.id}>
                                                 <BreadcrumbLink className='hover:cursor-pointer hover:text-white' >
                                                     {question.breadcrumb}
                                                 </BreadcrumbLink>
