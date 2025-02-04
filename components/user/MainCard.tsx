@@ -146,7 +146,7 @@ const ccnQuestions: QuestionInterface[] = [
             action: "Not Authorized",
             reason: "Provider Non Authorized - Failure to Cooperate with Transfer",
             letter: "FTCWT",
-            exception: 19
+            exception: null
         },
         startTransfer: false
     },
@@ -297,8 +297,8 @@ const ccnQuestions: QuestionInterface[] = [
         },
         noUMDecision: {
             action: "Not Authorized",
-            reason: "Provider Non-Authorized - Anticipated Unauthorized Post Stabilization Care",
-            letter: "UPSC",
+            reason: "Provider Non-Authorized - Failure To Cooperate With Transfer",
+            letter: "FTCWT",
             exception: null
         },
         startTransfer: false
