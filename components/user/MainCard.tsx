@@ -73,7 +73,7 @@ const defaultQuestion = {
 const ccnQuestions: QuestionInterface[] = [
     {
         id: 0,
-        question: "Verbal or Fax?",
+        question: "Notification: Verbal or Fax?",
         tooltip: "How did NKF notify of new admission?",
         breadcrumb: "Verbal?",
         yesIndex: 1,
@@ -869,7 +869,7 @@ const fcnaQuestions: QuestionInterface[] = [
 const MainCard = () => {
     const [questionStack, setQuestionStack] = useState<QuestionInterface[]>([ccnQuestions[0]])
     const [currentQuestion, setCurrentQuestion] = useState(ccnQuestions[0])
-    const [activeTab, setActiveTab] = useState<string>("ccn")
+    const [activeTab, setActiveTab] = useState<string>("initial")
     const [decisionMade, setDecisionMade] = useState<UMDecisionInterface | null>(null)
     const spanMotionAnimation = {
         initial: { scale: 0.5 },
@@ -942,7 +942,7 @@ const MainCard = () => {
         setDecisionMade(null)
     }
     const resetQuestionaire = () => {
-        setActiveTab("ccn")
+        setActiveTab("initial")
         setCurrentQuestion(ccnQuestions[0])
         setQuestionStack([ccnQuestions[0]])
         setDecisionMade(null)
@@ -976,14 +976,230 @@ const MainCard = () => {
                         </div>
                         <div className="col-span-full my-4">
                             <div className='flex w-full justify-center'>
-                                <Tabs value={activeTab} defaultValue="ccn" onValueChange={handleTabChange} className="w-[700px]">
-                                    <TabsList className="grid w-full grid-cols-5">
+                                <Tabs value={activeTab} defaultValue="ccn" onValueChange={handleTabChange} className="w-[900px]">
+                                    <TabsList className="grid w-full grid-cols-6">
+                                        <TabsTrigger value="initial">Initial</TabsTrigger>
                                         <TabsTrigger value="ccn">CCN</TabsTrigger>
                                         <TabsTrigger value="auth">Auth</TabsTrigger>
                                         <TabsTrigger value="upsc">UPSC / RUPSC</TabsTrigger>
                                         <TabsTrigger value="fcna">FCNA / FTCWT</TabsTrigger>
                                         <TabsTrigger value="noAuth">No Auth Req</TabsTrigger>
                                     </TabsList>
+                                    <TabsContent value="initial">
+                                        {decisionMade ? (
+                                            // UM DECISION CARD
+                                            <Card>
+                                                <CardHeader>
+                                                    <CardTitle className={cn('flex flex-col items-center justify-center space-y-2', decisionMade.action == "Authorized Stable" ? "text-green-500" : decisionMade.letter == "CCN" ? "text-yellow-500" : 'text-red-500')}>
+                                                        <motion.div
+                                                            {...spanMotionAnimation}
+                                                        >
+                                                            <motion.span
+                                                                key={currentQuestion.id}
+                                                                {...spanMotionAnimation}
+                                                                className='font-bold'
+                                                            >
+                                                                Action:
+                                                            </motion.span>
+                                                            <motion.span
+                                                                key={decisionMade.action}
+                                                                className=''
+                                                                {...spanMotionAnimation}
+                                                            >
+                                                                {decisionMade.action}
+                                                            </motion.span>
+                                                        </motion.div>
+                                                    </CardTitle>
+                                                </CardHeader>
+                                                <CardContent className="flex flex-col space-y-2 justify-center items-center mt-12 text-center text-blue-500">
+                                                    <motion.span
+                                                        key={decisionMade.reason}
+                                                        {...spanMotionAnimation}
+                                                    >
+                                                        <span className='font-bold'>Reason: </span> {decisionMade.reason}
+                                                    </motion.span>
+                                                </CardContent>
+                                                <CardFooter className='mt-12 flex flex-col space-y-6 justify-center items-center text-yellow-800 font-extrabold text-xl'>
+                                                    <motion.div
+                                                        key={decisionMade.letter}
+                                                        {...spanMotionAnimation}
+                                                    >
+                                                        <span className='font-bold'> Letter: </span> {decisionMade.letter}
+                                                    </motion.div>
+                                                    {decisionMade.exception && (
+                                                        <motion.div
+                                                            key={decisionMade.exception}
+                                                            {...spanMotionAnimation}
+                                                        >
+                                                            <Button onClick={() => handleExceptionClick(ccnQuestions)} variant={"outline"}>
+                                                                <Speech />
+                                                                Verbal Given After?
+                                                            </Button>
+                                                        </motion.div>
+                                                    )}
+                                                    <Dialog>
+                                                        <DialogTrigger>
+                                                            <InfoIcon size={18} color='orange' className="text-gray-400" />
+                                                        </DialogTrigger>
+                                                        <DialogContent>
+                                                            <DialogHeader className='flex items-center justify-center'>
+                                                                <DialogTitle> {currentQuestion.question} </DialogTitle>
+                                                                <DialogDescription className='mt-4'>
+                                                                    {currentQuestion.tooltip}
+                                                                </DialogDescription>
+                                                            </DialogHeader>
+                                                            <DialogFooter className="sm:justify-center flex justify-center items-center">
+                                                                <DialogClose asChild>
+                                                                    <Button type="button">
+                                                                        Close
+                                                                    </Button>
+                                                                </DialogClose>
+                                                            </DialogFooter>
+                                                        </DialogContent>
+                                                    </Dialog>
+                                                    <Dialog>
+                                                        <DialogTrigger>
+                                                            <RotateCcw color='blue' size={18} />
+                                                        </DialogTrigger>
+                                                        <DialogContent>
+                                                            <DialogHeader className='flex items-center justify-center'>
+                                                                <DialogTitle>Are You Sure You'd Like To Restart?</DialogTitle>
+                                                                <DialogDescription>
+                                                                </DialogDescription>
+                                                            </DialogHeader>
+                                                            <DialogFooter className="sm:justify-center flex justify-center items-center">
+                                                                <DialogClose asChild>
+                                                                    <Button onClick={resetQuestionaire} type="button" variant="secondary">
+                                                                        Yes
+                                                                    </Button>
+                                                                </DialogClose>
+                                                            </DialogFooter>
+                                                        </DialogContent>
+                                                    </Dialog>
+                                                </CardFooter>
+                                            </Card>
+                                        ) : (
+                                            // QUESTIONAIRE CARD
+                                            <Card>
+                                                <CardHeader>
+                                                    <CardTitle className='flex items-center justify-center text-xl'>
+                                                        <motion.span
+                                                            key={currentQuestion.id}
+                                                            {...spanMotionAnimation}
+                                                        >
+                                                            {currentQuestion.question}
+                                                        </motion.span>
+                                                    </CardTitle>
+                                                </CardHeader>
+                                                {/* Initial Render For Fax Vs. Verbal */}
+                                                {questionStack.length === 1 ? (
+                                                    <CardContent className="flex justify-around items-center mt-12">
+                                                        <motion.div
+                                                            className="space-y-1"
+                                                            whileHover={{
+                                                                scale: 1.05,
+                                                                transition: { duration: 0.2 },
+                                                            }}
+                                                            whileTap={{ scale: 0.8 }}
+                                                        >
+                                                            <Button className='bg-blue-500 hover:bg-blue-300' onClick={(e) => handleQuestionClick(e, "no", ccnQuestions)}>
+                                                                <MailCheckIcon />
+                                                                {currentQuestion.choices.no}
+                                                            </Button>
+                                                        </motion.div>
+                                                        <motion.div
+                                                            className="space-y-1"
+                                                            whileHover={{
+                                                                scale: 1.05,
+                                                                transition: { duration: 0.2 },
+                                                            }}
+                                                            whileTap={{ scale: 0.8 }}
+                                                        >
+                                                            <Button onClick={(e) => handleQuestionClick(e, "yes", ccnQuestions)} className='bg-green-500 hover:bg-green-800' variant={"default"}>
+                                                                <Speech />
+                                                                {currentQuestion.choices.yes}
+                                                            </Button>
+                                                        </motion.div>
+                                                    </CardContent>
+                                                ) : (
+                                                    // ALL OTHER QUESTIONAIRE CHOICES
+                                                    <CardContent className="flex justify-around items-center mt-12">
+                                                        {/* X BUTTON IS CONDITIONALLY RENDERED */}
+                                                        {currentQuestion.question != "If Any Non-KFH Verbal Stability Given Subsequently" && (
+                                                            <motion.div
+                                                                className="space-y-1"
+                                                                whileHover={{
+                                                                    scale: 1.05,
+                                                                    transition: { duration: 0.2 },
+                                                                }}
+                                                                whileTap={{ scale: 0.8 }}
+                                                            >
+                                                                <Button onClick={(e) => handleQuestionClick(e, "no", ccnQuestions)} variant={"destructive"}>
+                                                                    <X />
+                                                                    {currentQuestion.choices.no}
+                                                                </Button>
+                                                            </motion.div>
+                                                        )}
+                                                        {/* YES BUTTON */}
+                                                        <motion.div
+                                                            className="space-y-1"
+                                                            whileHover={{
+                                                                scale: 1.05,
+                                                                transition: { duration: 0.2 },
+                                                            }}
+                                                            whileTap={{ scale: 0.8 }}
+                                                        >
+                                                            <Button onClick={(e) => handleQuestionClick(e, "yes", ccnQuestions)} className='bg-green-500 hover:bg-green-400' variant={"default"}>
+                                                                <Check />
+                                                                {currentQuestion.choices.yes}
+                                                            </Button>
+                                                        </motion.div>
+                                                    </CardContent>
+                                                )}
+                                                <CardFooter className='mt-12 flex items-center space-x-4 justify-center'>
+                                                    <Dialog>
+                                                        <DialogTrigger>
+                                                            <InfoIcon size={18} color='orange' className="text-gray-400" />
+                                                        </DialogTrigger>
+                                                        <DialogContent>
+                                                            <DialogHeader className='flex items-center justify-center'>
+                                                                <DialogTitle> {currentQuestion.question} </DialogTitle>
+                                                                <DialogDescription className='mt-4'>
+                                                                    {currentQuestion.tooltip}
+                                                                </DialogDescription>
+                                                            </DialogHeader>
+                                                            <DialogFooter className="sm:justify-center flex justify-center items-center">
+                                                                <DialogClose asChild>
+                                                                    <Button type="button">
+                                                                        Close
+                                                                    </Button>
+                                                                </DialogClose>
+                                                            </DialogFooter>
+                                                        </DialogContent>
+                                                    </Dialog>
+                                                    <Dialog>
+                                                        <DialogTrigger>
+                                                            <RotateCcw color='blue' size={18} />
+                                                        </DialogTrigger>
+                                                        <DialogContent>
+                                                            <DialogHeader className='flex items-center justify-center'>
+                                                                <DialogTitle>Are You Sure You'd Like To Restart?</DialogTitle>
+                                                                <DialogDescription>
+                                                                </DialogDescription>
+                                                            </DialogHeader>
+                                                            <DialogFooter className="sm:justify-center flex justify-center items-center">
+                                                                <DialogClose asChild>
+                                                                    <Button onClick={resetQuestionaire} type="button" variant="secondary">
+                                                                        Yes
+                                                                    </Button>
+                                                                </DialogClose>
+                                                            </DialogFooter>
+                                                        </DialogContent>
+                                                    </Dialog>
+                                                </CardFooter>
+                                            </Card>
+                                        )}
+                                    </TabsContent>
                                     <TabsContent value="ccn">
                                         {decisionMade ? (
                                             // UM DECISION CARD
