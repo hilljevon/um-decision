@@ -27,7 +27,7 @@ export default function Home() {
                 <DialogHeader>
                   <DialogTitle>UM Decision Guide</DialogTitle>
                   <DialogDescription className="text-lg">
-                    Please select the tab that corresponds to the review outcome from <span className="font-extrabold underline">yesterday</span>. For <span className="font-bold underline">initial</span> notifications, proceed with the <span className="text-yellow-400 font-bold"> CCN </span> tab. <br /> <br />
+                    Please select the tab that corresponds to the review outcome from <span className="font-extrabold underline">yesterday</span>. <br /> <br />
 
                     For the <span className="text-purple-500 font-bold underline">UPSC/RUPSC</span> tab, this indicates that the previous review outcome was <span className="font-bold underline">either</span> UPSC or RUPSC. The same applies to the <span className="text-blue-500 font-bold underline">FCNA/FTCWT</span> tab. <br /> <br />
 
