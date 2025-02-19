@@ -16,7 +16,7 @@ export default function Home() {
       <header className="top-0 z-10 flex h-[57px] items-center gap-1 border-b bg-background px-4">
         <div className="flex justify-between w-full items-center">
           <div>
-            <h1 className="text-xl font-semibold">OURS UM Guide</h1>
+            <h1 className="text-xl font-semibold">OURS RO Guide</h1>
           </div>
           <div className="mr-8">
             <Dialog>
@@ -25,7 +25,7 @@ export default function Home() {
               </DialogTrigger>
               <DialogContent>
                 <DialogHeader>
-                  <DialogTitle>UM Decision Guide</DialogTitle>
+                  <DialogTitle>Review Outcome Guide</DialogTitle>
                   <DialogDescription className="text-lg">
                     Please select the tab that corresponds to the review outcome from <span className="font-extrabold underline">yesterday</span>. <br /> <br />
 
