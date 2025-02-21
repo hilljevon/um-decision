@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "UM Decision",
-  description: "OURS UM Decision Helper",
+  title: "Review Outcome Helper",
+  description: "Review Outcome Helper",
 };
 
 export default function RootLayout({
