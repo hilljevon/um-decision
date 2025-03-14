@@ -1,5 +1,5 @@
 import MainCard from "@/components/user/MainCard";
-import { CircleHelp, HelpCircle, HelpingHandIcon, RotateCcw } from "lucide-react";
+import { CircleHelp, Hand, HelpCircle, HelpingHandIcon, RotateCcw } from "lucide-react";
 import Image from "next/image";
 import {
   Dialog,
@@ -9,6 +9,13 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -18,7 +25,19 @@ export default function Home() {
           <div>
             <h1 className="text-xl font-semibold">OURS RO Guide</h1>
           </div>
-          <div className="mr-8">
+          <div className="mr-8 flex justify-around space-x-4">
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Link className=" inline-flex m-0 p-0" href={"/other"}>
+                    <Hand />
+                  </Link>
+                </TooltipTrigger>
+                <TooltipContent>
+                  Other Coverages
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
             <Dialog>
               <DialogTrigger>
                 <CircleHelp className="hover:cursor-pointer" />
