@@ -891,7 +891,7 @@ const coverages = [
         title: "ccs",
         name: "CCS",
         reviewOutcome: ["Normal management and RO pathway until SAR confirmed.",
-            "Once SAR confirmed for KP MD/leadership instructs to lae at NKF: Render UPSC once, no letter, no further RO required and PAD."
+            "Once SAR confirmed for KP MD/leadership instructs to leave at NKF: Render UPSC once, no letter, no further RO required and PAD."
         ],
         paymentNotes: ["Document in PN as soon as SAR# or when KP MD/leadership instruct at leave at NKF."],
         repat: [
@@ -961,7 +961,7 @@ const coverages = [
         name: "Jail/Custody",
         reviewOutcome: [
             "Normal management and RO pathway.",
-            "Once stable with verbal/written order t transfer but unable to transfer back to county: Render UPSC once, no letter no further Ro required and PAD."
+            "Once stable with verbal/written order to transfer but unable to transfer back to county: Render UPSC once, no letter no further RO required and PAD."
         ],
         paymentNotes: ["Document in PN if ready for transfer with verbal/written order but county does not accept patient back."],
         repat: ["Yes"],
